@@ -24,9 +24,11 @@ RUN \
   export VERSION=$(curl -qsSL https://portswigger.net/burp/releases/community/latest 2>/dev/null | grep -Po -m 1 '(?<=version=)[^&]+' | tr -d '\n') && \
   curl -SL -o "burp.jar" "https://portswigger.net/burp/releases/download\?product\=community\&version\=${VERSION}\&type\=Jar"
 
+COPY --chown=user:user ./project/ .
+
 ENV LC_ALL=en_US.UTF-8
 ENV LC_CTYPE=en_US.UTF-8
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US.UTF-8
 
-CMD ["java", "-jar", "burp.jar"]
+CMD ["java", "-jar", "burp.jar", "--config-file=burp.proj.json", "--user-config-file=user.json"]
