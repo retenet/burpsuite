@@ -22,7 +22,7 @@ WORKDIR /home/user
 
 RUN \
   export VERSION=$(curl -qsSL https://portswigger.net/burp/releases/community/latest 2>/dev/null | grep -Po -m 1 '(?<=version=)[^&]+' | tr -d '\n') && \
-  curl -SL -o "burp.jar" "https://portswigger.net/burp/releases/download\?product\=community\&version\=${VERSION}\&type\=Jar"
+  curl -SL -o "burp.jar" "https://portswigger.net/burp/releases/download?product\=community\&version\=${VERSION}\&type\=Jar"
 
 COPY --chown=user:user ./project/ .
 
